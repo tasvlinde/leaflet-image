@@ -6,15 +6,15 @@
         var cacheBusterDate = +new Date();
 
 // leaflet-image
-        module.exports = function leafletImage(dimensions, map, callback) {
+        module.exports = function leafletImage(map, callback) {
 
             var hasMapbox = !!L.mapbox;
 
             var dimensions = map.getSize();
             layerQueue = new queue(1);
             var canvas = document.createElement('canvas');
-            canvas.width = dimensions.x * 4;
-            canvas.height = dimensions.y * 4;
+            canvas.width = dimensions.x * 3;
+            canvas.height = dimensions.y * 3;
 
             var ctx = canvas.getContext('2d');
 
@@ -79,8 +79,8 @@
                 var isCanvasLayer = (L.TileLayer.Canvas && layer instanceof L.TileLayer.Canvas),
                     canvas = document.createElement('canvas');
 
-                canvas.width = dimensions.x * 4;
-                canvas.height = dimensions.y * 4;
+                canvas.width = dimensions.x * 3;
+                canvas.height = dimensions.y * 3;
 
                 var ctx = canvas.getContext('2d'),
                     bounds = map.getPixelBounds(),
@@ -172,8 +172,8 @@
                 }
 
                 function drawTile(d) {
-                    ctx.drawImage(d.img, Math.floor(d.pos.x * 4), Math.floor(d.pos.y * 4),
-                        d.size * 4, d.size * 4);
+                    ctx.drawImage(d.img, Math.floor(d.pos.x * 3), Math.floor(d.pos.y * 3),
+                        d.size * 3, d.size * 3);
                 }
             }
 
@@ -211,11 +211,11 @@
 
                 if (size instanceof L.Point) size = [size.x, size.y];
 
-                var x = Math.round(pos.x * 4 - size[0] + anchor.x),
-                    y = Math.round(pos.y * 4 - anchor.y);
+                var x = Math.round(pos.x * 3 - size[0] + anchor.x),
+                    y = Math.round(pos.y * 3 - anchor.y);
 
-                canvas.width = dimensions.x * 4;
-                canvas.height = dimensions.y * 4;
+                canvas.width = dimensions.x * 3;
+                canvas.height = dimensions.y * 3;
                 im.crossOrigin = '';
                 im.onload = function () {
                     ctx.drawImage(this, x , y, size[0], size[1]);
